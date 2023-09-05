@@ -66,7 +66,12 @@ function App() {
       </div>
 
       {isActive && (
-        <FormSplitBill friendName={friendName} friendsArr={friendsArr} />
+        <FormSplitBill
+          onActive={setIsActive}
+          onSplitBill={setFriendsArr}
+          friendName={friendName}
+          friendsArr={friendsArr}
+        />
       )}
     </div>
   );

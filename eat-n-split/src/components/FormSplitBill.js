@@ -1,12 +1,29 @@
 import { useState } from "react";
 import Button from "./Button";
 
-function FormSplitBill({ friendsArr, friendName }) {
+function FormSplitBill({ onSplitBill, friendsArr, friendName, onActive }) {
   const [billValue, setBillValue] = useState("");
   const [userExpense, setUserExpense] = useState("");
-  const [whoPay, setWhoPay] = useState("");
+  const [whoPay, setWhoPay] = useState("user");
   const friendExpense = +billValue - +userExpense;
-  function handleSubmit() {}
+  function handleSubmit(e) {
+    e.preventDefault();
+    for (let i of friendsArr) {
+      if (i.name === friendName) {
+        if (whoPay === "user") {
+          i.balance -= friendExpense;
+          onSplitBill((prev) => [...prev]);
+        } else {
+          i.balance += +userExpense;
+          onSplitBill((prev) => [...prev]);
+        }
+      }
+    }
+
+    setBillValue("");
+    setUserExpense("");
+    onActive(false);
+  }
   return (
     <form className="form-split-bill" onSubmit={handleSubmit}>
       <h2>Split a bill with {friendName}</h2>
