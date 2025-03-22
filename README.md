@@ -1,2 +1,3 @@
-# eat-n-split
-react app
+# Bill Splitter App  
+
+An application that helps friends split bills and calculates how much each person owes. 
